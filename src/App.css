@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+.p {
+  color: #353636;
+}
 
 .App-logo {
   height: 40vmin;
@@ -14,7 +17,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #e5e5e5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +38,31 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.headroom {
+  /* position: absolute; */
+  width: 100%;
+  height: 85px;
+  left: 0px;
+  top: 52px;
+
+  background: #303030;
+}
+.textBox1 {
+  /* position: absolute; */
+  width: 1003px;
+  height: 288px;
+  left: 103px;
+  top: 99px;
+  text-align: left;
+
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 100%;
+  /* or 24px */
+
+  color: #363535;
 }
