@@ -9,9 +9,12 @@ module.exports = {
         header: "#303030",
         headerKaBaap: "#272727",
         headerHover: "#252525",
+        footer: "#121212",
       },
       fontSize: {
-        xxl: "2.25rem",
+        xxl: "2.1rem",
+        "body-lg": "1rem",
+        body: ".875rem",
       },
     },
   },
