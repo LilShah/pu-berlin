@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { About, Bullet, Email } from "./Page";
-import ReactCaptchaa from "react-captchaa";
 import "react-captchaa/dist/index.css";
 import CaptchaTest from "./Captcha.js";
 
@@ -9,8 +8,6 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVerified, verifyForm] = useState(false);
   const [lang, setLang] = useState(false);
-  const [captchaText, setCaptchaText] = useState("");
-  const [textboxText, setTextboxText] = useState("");
   return (
     <div className=" flex flex-col h-screen justify-between">
       <header className="py-2 bg-headerKaBaap position-absolute">
@@ -224,47 +221,10 @@ function App() {
             <Email />
           </div>
         </main>
-        <div className="px-10 py-10">
-          <CaptchaTest />
-          <ReactCaptchaa
-            captchaText={(captchaText) => {
-              setCaptchaText(captchaText); // captcha text ${captcha}
-            }}
-            captchaLength={6}
-            onCanvasClick={(e) => {
-              console.log(e);
-            }}
-            height={150}
-            width={280}
-            iconName={"FiRefreshCw"}
-            iconColor={"#121212"}
-            fontSize={"4em"}
-            iconSize={"1em"}
-            charactersInclude={
-              "0123456789abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ!"
-            }
-          />
-          <div className="flex flex-row">
-            <div className="px-2.5">
-              <input
-                className="bg-header hover:bg-white-900 text-white font-bold py-2 rounded"
-                type="text"
-                onChange={(e) => {
-                  setTextboxText(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <button
-                className="bg-header hover:bg-headerKaBaap text-white font-bold py-2 px-4 rounded"
-                onClick={() => {}}
-              >
-                Verify
-              </button>
-            </div>
-          </div>
-        </div>
       </main>
+      <div className="top-10 md:top-40 py-6 px-6 md:px-40">
+        <CaptchaTest />
+      </div>
       <footer className="py-10  text-white bg-footer">
         <div className="flex flex-row px-44">
           <div>

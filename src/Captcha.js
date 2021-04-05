@@ -26,30 +26,30 @@ class CaptchaTest extends Component {
 
   render() {
     return (
-      <div>
-        <div className="container">
-          <div className="form-group">
-            <div className="col mt-3">
-              <LoadCanvasTemplate />
-            </div>
+      <div className="bg-gray-500 w-80 rounded">
+        <div className="pl-16 pt-5">
+          <LoadCanvasTemplateNoReload />
+        </div>
+        <div className="flex flex-row">
+          <div className="pt-20 pl-6">
+            <input
+              className="Placeholder"
+              class="px-3 py-2 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+              placeholder="   Enter Captcha Value"
+              id="user_captcha_input"
+              name="user_captcha_input"
+              type="text"
+            ></input>
+          </div>
 
-            <div className="col mt-3">
-              <div>
-                <input
-                  placeholder="Enter Captcha Value"
-                  id="user_captcha_input"
-                  name="user_captcha_input"
-                  type="text"
-                ></input>
-              </div>
-            </div>
-
-            <div className="col mt-3">
-              <div>
-                <button class="btn btn-primary" onClick={() => this.doSubmit()}>
-                  Submit
-                </button>
-              </div>
+          <div className="pt-20 pb-6 pl-3">
+            <div>
+              <button
+                class="bg-header hover:bg-headerKaBaap text-white font-bold py-2 px-4 rounded"
+                onClick={() => this.doSubmit()}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>
