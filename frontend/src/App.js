@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+
 import { Transition } from "@headlessui/react";
-import { About, Bullet, Email } from "./Page";
 import "react-captchaa/dist/index.css";
-import CaptchaTest from "./Captcha.js";
+
+import { About, Bullet, Email } from "./Page";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isVerified, verifyForm] = useState(false);
   const [lang, setLang] = useState(false);
   return (
     <div className=" flex flex-col h-screen justify-between">
@@ -222,9 +222,7 @@ function App() {
           </div>
         </main>
       </main>
-      <div className="top-10 md:top-40 py-6 px-6 md:px-40">
-        <CaptchaTest />
-      </div>
+
       <footer className="py-10  text-white bg-footer">
         <div className="flex flex-row px-44">
           <div>

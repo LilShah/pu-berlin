@@ -1,6 +1,8 @@
 import "./App.css";
 import { React, useState } from "react";
 
+import FormRequest from "./FormRequest.js";
+
 const textStyle = {
   position: "relative",
   height: "80vh",
@@ -85,17 +87,7 @@ export function Bullet() {
 export function Email() {
   return (
     <div style={textStyle} className="top-10 md:top-40 relative px-6 md:px-40">
-      <p className="text-justify text-base md:text-2xl md:w-6/12">
-        Tempor ea aliqua ut id aliquip dolor velit occaecat proident ea. Culpa
-        commodo in consequat est qui mollit officia quis. Sunt officia
-        consectetur aliquip dolor magna qui fugiat quis consequat aliqua esse
-        aliqua cupidatat. Dolore ullamco reprehenderit Lorem duis minim nulla
-        fugiat quis et aute ex sint sit. Commodo ullamco ad dolore laborum est
-        eu proident aliqua consectetur eiusmod labore. Reprehenderit laborum
-        ipsum qui ex. Do velit minim reprehenderit et mollit ut est ipsum
-        aliquip laborum deserunt ex. Ut esse cupidatat anim eu voluptate
-        laborum. Et officia dolor consequat do nisi deserunt dolor. Eiusmod
-      </p>
+      <FormRequest />
     </div>
   );
 }
