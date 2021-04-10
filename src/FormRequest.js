@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as emailjs from "emailjs-com";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -6,46 +7,54 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 
-function FormRequest() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
+let creds = require("./credentials.json");
+
+function FormRequest(props) {
   useEffect(() => {
     loadCaptchaEnginge(6);
   });
+
   const doSubmit = () => {
     let user_captcha = document.getElementById("user_captcha_input").value;
-
     if (validateCaptcha(user_captcha) === true) {
       alert("Captcha Matched");
       loadCaptchaEnginge(6);
       document.getElementById("user_captcha_input").value = "";
+      return true;
     } else {
       alert("Captcha Does Not Match");
       document.getElementById("user_captcha_input").value = "";
+      return false;
     }
   };
 
   const submitRequest = async (e) => {
     e.preventDefault();
-    this.doSubmit();
-    setName(document.getElementById("nameField").value);
-    setEmail(document.getElementById("emailField").value);
-    setMessage(document.getElementById("messageField").value);
-    console.log({ name, email, message });
-    const response = await fetch("/access", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ name, email, message }),
-    });
-    const resData = await response.json();
-    if (resData.status === "success") {
-      alert("Message Sent.");
-      this.resetForm();
-    } else if (resData.status === "fail") {
-      alert("Message failed to send.");
+    let templateParams = {
+      from_name: document.getElementById("nameField").value,
+      to_name: creds.to_email,
+      subject:
+        "New message regarding PU-Berlin from " +
+        document.getElementById("nameField").value,
+      message: document.getElementById("messageField").value,
+    };
+    console.log(templateParams);
+    if (doSubmit()) {
+      emailjs
+        .send(
+          creds.service_id,
+          creds.template_id,
+          templateParams,
+          creds.user_id
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
     }
   };
 
@@ -95,8 +104,7 @@ function FormRequest() {
           <div className="flex flex-row">
             <div className="pt-3 pl-6">
               <input
-                className="Placeholder"
-                class="px-3 py-2 placeholder-blueGray-300 text-blueGray-600 w-10 bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                className="px-3 py-2 placeholder-blueGray-300 text-blueGray-600 w-10 bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"
                 placeholder="Enter Captcha Value"
                 id="user_captcha_input"
                 name="user_captcha_input"
