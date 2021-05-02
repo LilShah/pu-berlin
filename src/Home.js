@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { About, Bullet, Email } from "./Page";
 import Header from "./Header";
+import Footer from "./Footer";
 
 function Home() {
   const [useGerman, setLang] = useState(false);
@@ -55,20 +56,7 @@ function Home() {
           </div>
         </main>
       </main>
-
-      <footer className="py-10  text-white bg-footer">
-        <div className="flex flex-row px-44">
-          <div>
-            <h1 className="text-xl  text-left  font-bold  pb-10">Address</h1>
-            <p>Erasmusstrasse 10553 Berlin</p>
-          </div>
-          <div className="px-20">
-            <h1 className="text-xl text-left  font-bold pb-10">Contact</h1>
-            <p>Email: info@pu-berlin.com</p>
-            <p>Phone: +49 30 2356 8139</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

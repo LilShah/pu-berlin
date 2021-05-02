@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import Header from "./Header";
 import { textStyle } from "./Page";
+import Footer from "./Footer";
 const Imprint = () => {
   const [useGerman, setLang] = useState(false);
   const setLangFromChild = (lang) => {
@@ -26,6 +27,7 @@ const Imprint = () => {
             : "Our services are individual and tailored to each client and the needs of the client. We do not work according to a scheme, but rather define our consulting needs with the client in joint discussions. Our core services are:"}
         </p>
       </div>
+      <Footer />
     </div>
   );
 };
