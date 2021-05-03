@@ -10,7 +10,7 @@ const Header = ({ setLangOfParent }) => {
       <header className="py-2 bg-headerKaBaap position-absolute">
         <div className="max-w-7xl mx-auto">
           <div className=" items-center justify-between h-6">
-            <div className=" items-center">
+            <div className="px-10 md:px-0 items-center">
               <h1 className="text-xm font-bold text-gray-200 cursor-default">
                 +49 30 2356 8139
               </h1>
@@ -19,7 +19,7 @@ const Header = ({ setLangOfParent }) => {
         </div>
       </header>
       <header className="py-2 bg-header position-absolute pb-2">
-        <div className="max-w-7xl mx-auto pl-10 md:pl-0">
+        <div className="max-w-7xl mx-auto pl-2 md:pl-0">
           <div className="flex items-center justify-between h-10">
             <div className="flex items-center">
               <a
@@ -83,7 +83,7 @@ const Header = ({ setLangOfParent }) => {
                 </div>
               </div>
             </div>
-            <div className="-mr-2 flex md:hidden">
+            <div className="-mr-2 pr-4 flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"

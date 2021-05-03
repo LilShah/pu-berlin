@@ -11,18 +11,15 @@ const Privacy = (props) => {
   return (
     <div className="flex flex-col h-screen justify-between">
       <Header setLangOfParent={setLangFromChild} />
-      <main className="flex-grow">
+      <main>
         <header>
-          <div className="top-10 md:top-40 relative mx-auto py-6 px-6 md:px-40">
+          <div className="top-10 md:top-40 relative mx-auto py-6 px-10 md:px-40">
             <h1 className="text-3xl text-center md:text-left  font-bold text-gray-900 md:w-8/12">
               {useGerman ? "Datenschutz­erklärung" : "PRIVACY"}
             </h1>
           </div>
         </header>
-        <div
-          style={{ height: "360vh" }}
-          className="top-10 md:top-40 relative px-6 md:px-40 pb-20"
-        >
+        <div className="flex-1 top-10 md:top-40 relative pl-10 pr-6 md:px-40 pb-20">
           <div className="py-2" />
           <ul className="list-decimal">
             <h2 className="text-justify font-bold text-2xl md:text-left text-gray-900 md:w-8/12">
@@ -373,15 +370,20 @@ const Privacy = (props) => {
             <div className="py-1" />
             <p className="text-justify text-base md:text-lg md:w-8/12 ">
               {"Quelle: "}
-              <a href="https://www.datenschutzerklaerung.de">
+              <a
+                href="https://www.datenschutzerklaerung.de"
+                className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+              >
                 https://www.datenschutzerklaerung.de
               </a>
             </p>
           </ul>
         </div>
+        <div className="py-20" />
+        <div className="flex-1">
+          <Footer />
+        </div>
       </main>
-      <div className="py-96" />
-      <Footer />
     </div>
   );
 };
