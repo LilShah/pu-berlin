@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import Header from "./Header";
 import { textStyle } from "./Page";
 import Footer from "./Footer";
+
 const Imprint = () => {
   const [useGerman, setLang] = useState(false);
   const setLangFromChild = (lang) => {

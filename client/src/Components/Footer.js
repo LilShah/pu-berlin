@@ -1,4 +1,5 @@
 import React from "react";
+
 function Footer() {
   return (
     <footer className="py-10 relative text-white bg-footer object-bottom">

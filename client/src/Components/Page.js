@@ -1,7 +1,6 @@
 import "./App.css";
-import { React, useState } from "react";
-
-import FormRequest from "./FormRequest.js";
+import { React } from "react";
+import FormRequest from "../FormRequest.js";
 
 export const textStyle = {
   position: "relative",
