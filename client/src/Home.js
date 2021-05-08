@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { About, Bullet, Email } from "./Page";
-import Header from "./Header";
-import Footer from "./Footer";
+import { About, Bullet, Email } from "./Components/Page";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
 
 function Home() {
   const [useGerman, setLang] = useState(false);

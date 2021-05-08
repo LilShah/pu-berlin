@@ -1,69 +1,88 @@
 import React, { useEffect } from "react";
-import * as emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
 
-let creds = require("./credentials.json");
-
-function FormRequest(props) {
+function FormRequest() {
   useEffect(() => {
     loadCaptchaEnginge(6);
   });
+  const [emailStatus, setStatus] = React.useState(0);
+  let data = {
+    Name: "",
+    Email: "",
+    Message: "",
+  };
 
-  const doSubmit = () => {
+  const sendEmail = () => {
+    toast("Sending mail...");
+    axios
+      .post("/SendEmail", data)
+      .then((response) => {
+        console.log(response);
+        setStatus(2);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(() => {
+        toast("Email sent successfully!");
+      });
+  };
+
+  const isEmail = (email) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validate = (e) => {
+    data.Name = document.getElementById("messageField").value;
+    data.Email = document.getElementById("emailField").value;
+    data.Message = document.getElementById("messageField").value;
+    e.preventDefault();
+    if (!checkCaptcha()) {
+      toast.error("Captcha not matched");
+      return;
+    }
+    if (!isEmail(data.Email)) {
+      toast.error("Wrong email format!");
+      return;
+    }
+    e.target.reset();
+    setStatus(1);
+
+    sendEmail();
+  };
+
+  const checkCaptcha = () => {
     let user_captcha = document.getElementById("user_captcha_input").value;
-    if (validateCaptcha(user_captcha) === true) {
-      alert("Captcha Matched");
+    if (validateCaptcha(user_captcha)) {
       loadCaptchaEnginge(6);
       document.getElementById("user_captcha_input").value = "";
       return true;
     } else {
-      alert("Captcha Does Not Match");
       document.getElementById("user_captcha_input").value = "";
       return false;
     }
   };
 
-  const submitRequest = async (e) => {
-    e.preventDefault();
-    let templateParams = {
-      from_name: document.getElementById("nameField").value,
-      to_name: creds.to_email,
-      subject:
-        "New message regarding PU-Berlin from " +
-        document.getElementById("nameField").value,
-      message: document.getElementById("messageField").value,
-    };
-    console.log(templateParams);
-    if (doSubmit()) {
-      emailjs
-        .send(
-          creds.service_id,
-          creds.template_id,
-          templateParams,
-          creds.user_id
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
-    }
-  };
-
   return (
     <div>
-      <div className="w-full max-w-sm m-auto flex flex-col my-32">
+      <div className="md: md:w-4/12 flex flex-col md:my-1">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-gray-200 border"
-          onSubmit={submitRequest}
+          onSubmit={validate}
         >
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+          />
           <h2 className="text-2xl pt-6 pb-10 text-center font-medium text-gray-800">
             Leave us a message
           </h2>
@@ -73,7 +92,7 @@ function FormRequest(props) {
               type="text"
               id="nameField"
               name="yourName"
-              placeholder="Your name"
+              placeholder="Your Name"
               required
             />
           </div>
@@ -93,7 +112,7 @@ function FormRequest(props) {
               name="message"
               type="text"
               id="messageField"
-              placeholder="Your message"
+              placeholder="Your Message"
               required
             />
           </div>
