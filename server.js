@@ -20,7 +20,7 @@ app.post("/SendEmail", (req, res) => {
   }
 
   var transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: "Yahoo",
     auth: {
       user: creds.from_email,
       pass: creds.from_password,
