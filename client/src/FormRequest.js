@@ -7,21 +7,24 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import emailjs from "emailjs-com";
+import creds from "./credentials.json";
 
 function FormRequest() {
   useEffect(() => {
     loadCaptchaEnginge(6);
   });
   const [emailStatus, setStatus] = React.useState(0);
-  let data = {
-    Name: "",
-    Email: "",
-    Message: "",
+  let templateParams = {
+    name: "",
+    email: "",
+    message: "",
   };
 
-  const sendEmail = () => {
+  const sendEmail = (e) => {
+    e.preventDefault();
     toast("Sending mail...");
-    axios
+    /* axios
       .post("/SendEmail", data)
       .then((response) => {
         console.log(response);
@@ -32,31 +35,44 @@ function FormRequest() {
       })
       .then(() => {
         toast("Email sent successfully!");
-      });
+      }); */
+    emailjs
+      .send(creds.service_id, creds.template_id, templateParams, creds.user_id)
+      .then(
+        (result) => {
+          console.log(result.text);
+          toast.success("Email sent successfully!");
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error("Email not sent!");
+        }
+      );
   };
 
   const isEmail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
   const validate = (e) => {
-    data.Name = document.getElementById("messageField").value;
-    data.Email = document.getElementById("emailField").value;
-    data.Message = document.getElementById("messageField").value;
+    templateParams.name = document.getElementById("messageField").value;
+    templateParams.email = document.getElementById("emailField").value;
+    templateParams.message = document.getElementById("messageField").value;
     e.preventDefault();
     if (!checkCaptcha()) {
       toast.error("Captcha not matched");
       return;
     }
-    if (!isEmail(data.Email)) {
+    if (!isEmail(templateParams.email)) {
       toast.error("Wrong email format!");
       return;
     }
     e.target.reset();
     setStatus(1);
 
-    sendEmail();
+    sendEmail(e);
   };
 
   const checkCaptcha = () => {
