@@ -57,7 +57,7 @@ function FormRequest() {
   };
 
   const validate = (e) => {
-    templateParams.name = document.getElementById("messageField").value;
+    templateParams.name = document.getElementById("nameField").value;
     templateParams.email = document.getElementById("emailField").value;
     templateParams.message = document.getElementById("messageField").value;
     e.preventDefault();
